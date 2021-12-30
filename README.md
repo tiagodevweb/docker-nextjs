@@ -1,34 +1,50 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Dockerize Next JS 
 
-## Getting Started
+Node lab for development and production with docker and a Next JS application.
 
-First, run the development server:
+## Requisitos
 
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
+
+## Usage
+
+#### Development
+
+up container
 ```bash
-npm run dev
-# or
-yarn dev
+docker-compose up -d
+```
+list container
+```bash
+docker-compose ps
+```
+show container logs
+```bash
+docker-compose logs
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Production
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Build universal image
+```bash
+DOCKER_BUILDKIT=1 docker build -t <universal-image-name> --target production-universal .
+```
+```bash
+docker run --rm -it -p 3000:3000 <universal-image-name>
+```
+[http://localhost:3000](http://localhost:3000)
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Build static image
+```bash
+DOCKER_BUILDKIT=1 docker build -t <static-image-name> --target production-static .
+```
+```bash
+docker run --rm -it -p 80:80 <static-image-name>
+```
+[http://localhost](http://localhost)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+## License
 
-## Learn More
+The Dockerize Next JS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

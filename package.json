@@ -5,7 +5,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "resolve-assets-path": "replace-in-files --string \"/_next/static\" --replacement \"./static\" out/index.html",
+    "generate": "next export && npm run resolve-assets-path"
   },
   "dependencies": {
     "next": "12.0.7",
@@ -17,6 +19,7 @@
     "@types/react": "17.0.38",
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7",
+    "replace-in-files-cli": "^2.0.0",
     "typescript": "4.5.4"
   }
 }
