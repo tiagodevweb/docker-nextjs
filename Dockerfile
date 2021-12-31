@@ -27,7 +27,7 @@ FROM    base AS production-universal
 ENV     NODE_ENV production
 RUN     apk add --no-cache tini libc6-compat
 # You only need to copy next.config.js if you are NOT using the default configuration
-# COPY    --chown=node:node --from=builder /usr/src/app/next.config.js ./
+#COPY    --chown=node:node --from=builder /usr/src/app/next.config.js ./
 COPY    --chown=node:node --from=build /usr/src/app/public ./public
 COPY    --chown=node:node --from=build /usr/src/app/.next ./.next
 COPY    --chown=node:node --from=deps /usr/src/app/node_modules ./node_modules
@@ -43,10 +43,12 @@ RUN     npm run generate
 # Image nginx:1.20.2-alpine
 FROM    nginx@sha256:74694f2de64c44787a81f0554aa45b281e468c0c58b8665fafceda624d31e556 AS production-static
 # Fix CVE-2021-22945, CVE-2021-22946, CVE-2021-22947 and CVE-2021-40528
-RUN     apk add --no-cache "curl>=7.79.0-r0" "libgcrypt>=1.8.8-r1" openssl \
+RUN     apk add --no-cache "curl>=7.79.0-r0" "libgcrypt>=1.8.8-r1" openssl bash \
         && rm -rf /usr/share/nginx/html/* \
         && touch /var/run/nginx.pid \
         && chown -R nginx:nginx /var/cache/nginx /var/run/nginx.pid
+# You only need to copy nginx.conf if you are NOT using the default configuration
+#COPY    nginx.conf /etc/nginx/nginx.conf
 COPY    --chown=nginx:nginx --from=generate /usr/src/app/out/* /usr/share/nginx/html/
 USER    nginx
 EXPOSE  80/tcp 443/tcp
