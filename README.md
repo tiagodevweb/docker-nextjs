@@ -1,4 +1,4 @@
-# Dockerize Next JS 
+# Docker Next JS 
 
 Node lab for development and production with docker and a Next JS application.
 
@@ -46,5 +46,5 @@ docker run --rm -it -p 80:80 <static-image-name>
 
 ## License
 
-The Dockerize Next JS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Docker Next JS is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
