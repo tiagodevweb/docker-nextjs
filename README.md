@@ -2,7 +2,7 @@
 
 Node lab for development and production with docker and a Next JS application.
 
-## Requisitos
+## Requirements
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
