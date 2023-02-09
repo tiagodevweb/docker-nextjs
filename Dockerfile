@@ -27,7 +27,7 @@ FROM    base AS production-universal
 ENV     NODE_ENV production
 RUN     apk add --no-cache tini libc6-compat
 # You only need to copy next.config.js if you are NOT using the default configuration
-#COPY    --chown=node:node --from=builder /usr/src/app/next.config.js ./
+#COPY    --chown=node:node --from=build /usr/src/app/next.config.js ./
 COPY    --chown=node:node --from=build /usr/src/app/public ./public
 COPY    --chown=node:node --from=build /usr/src/app/.next ./.next
 COPY    --chown=node:node --from=deps /usr/src/app/node_modules ./node_modules
